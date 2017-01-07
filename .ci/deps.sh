@@ -12,7 +12,9 @@ esac
 # apt-get commands
 export DEBIAN_FRONTEND=noninteractive
 
-deps="libclang1-3.4 indent mono-mcs chktex r-base julia golang luarocks verilator cppcheck flawfinder"
+# Install JDK 8, JDK 9 early-access is not liked by some packages:
+# https://github.com/coala/coala-bears/issues/1270
+deps="libclang1-3.4 indent mono-mcs chktex r-base julia golang luarocks verilator cppcheck flawfinder openjdk-8-jdk"
 deps_infer="m4 opam"
 
 case $CIRCLE_BUILD_IMAGE in
@@ -46,9 +48,6 @@ case $CIRCLE_BUILD_IMAGE in
     # aspcud is an external dependency resolver, and is the recommended
     # solution: https://github.com/ocaml/opam/issues/2507
     deps_infer="$deps_infer aspcud"
-    # Install JDK 8, JDK 9 early-access is not liked by some packages:
-    # https://github.com/coala/coala-bears/issues/1270
-    deps="$deps openjdk-8-jdk"
     ;;
 esac
 
